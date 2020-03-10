@@ -1,14 +1,16 @@
-// Requiring our models and passport as we've configured it
+// Requiring our models and travelinfo
 var db = require("../models");
-var passport = require("../config/passport");
+var travelInfo = require("../config/travelinfo");
 
 module.exports = function(app) {
-  // Using the passport.authenticate middleware with our local strategy.
+  // Using the travelInfo.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  // eslint-disable-next-line prettier/prettier
+  app.post("/api/travelinfo", travelInfo.authenticate("local"), function(req, res) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
+      name: req.body.name,
       email: req.user.email,
       id: req.user.id
     });
