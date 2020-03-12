@@ -9,19 +9,28 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
-<title>StayKay</title>
+<p>
+  <center>
+    <a href='https://photos.google.com/share/AF1QipN7cBelqxNNpAPTYRaDTQAgDR_-PSEcPwy-C4FQHmbCncyfv4f_pGqReRcFFpOaSQ?key=R25nLTVVZmxMd01SVVVHWHNZNmMwRGJGT3dTM2lB&source=ctrlq.org'>
+    <img src='https://lh3.googleusercontent.com/x6viQiukSErXpjGxg_VM0YvXxQiXj-l911Nmd-g3_ZRJKGbKqm4nrNLlbU-Q8AIgLSKK2fdIcrD7QteETQesQDMZbKyso0oC3C2csmROyiO7u-Z5TW2DDBT-h3wVeEn0g5OGxf6wTQ=w2400'/>
+    </a>
+  </center>
+</p>
+
+<title> StayKay </title>
 </head>
 
 <body>
     
 </div>
 <div class="header">
-  <h1><center>StayKay</center></h1>
+  <h1><center> StayKay </center></h1>
 </div>
 
-<h2>How Long Is Your StayKay?</h2>
-<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+<h2> How Long Is Your StayKay? </h2>
+<input type="text" name="daterange" value="01/01/2020 - 01/15/2040" />
 
 <script>
 $(function() {
@@ -38,6 +47,7 @@ $(function() {
     <div class="uk-margin">
         <div class="uk-form-controls">
             <select class="uk-select budget" id="form-stacked-select">
+                <option value="Selections">Choose Your Adventure!</option>
                 <option value="Concerts">Concerts</option>
                 <option value="Festivals">Festivals</option>
                 <option value="Sports">Sports</option>
@@ -47,9 +57,14 @@ $(function() {
     </div>
 <br>
 <br>
-        <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom submit" type ="Submit" id = "Time to Relax">Take Me Away...</button>
+    <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom submit" 
+    type ="Submit" id = "SubmitB"> Enjoy Your Stay...</button>
     </center>
-</div>
+
+<footer class="footer">
+  <p class="footerP"> © Anya L | Zedekia M | Young P| Cory S © </p>
+  
+</footer>
 
 <script src="server.js"></script>
 </body>
