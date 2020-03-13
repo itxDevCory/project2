@@ -84,7 +84,7 @@ U
 
         console.log("change dropdown happened");
         
-        $.get("https://app.ticketmaster.com/discovery/v2/events.json?apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function (data) {
+        $.get("https://app.ticketmaster.com/discovery/v2/events.json?city=Philadelphia&countryCode=US&apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function (data) {
           var listOfEvents = $('#listOfEvents');
           listOfEvents.empty();
           console.log(data);
