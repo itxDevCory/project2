@@ -33,10 +33,14 @@
 <input type="text" name="daterange" value="01/01/2020 - 01/15/2040" />
 
 <script>
+  var startDate;
+  var endDate;
 $(function() {
   $('input[name="daterange"]').daterangepicker({
     opens: 'left'
   }, function(start, end, label) {
+    startDate = start;
+    endDate = end;
     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
   });
 });
@@ -47,11 +51,6 @@ U
     <div class="uk-margin">
         <div class="uk-form-controls">
             <select class="uk-select budget" id="form-stacked-select">
-                <option value="Selections">Choose Your Adventure!</option>
-                <option value="Concerts">Concerts</option>
-                <option value="Festivals">Festivals</option>
-                <option value="Sports">Sports</option>
-                <option value="Theater/Arts">Theater or Arts</option>
             </select>
         </div>
     </div>
@@ -80,6 +79,21 @@ U
 <script>
   $(document).ready(function () {
 
+    var classifications = $.get("https://app.ticketmaster.com/discovery/v2/classifications.json?apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function(data)
+    {
+      var drop_down = $('#form-stacked-select');
+      console.log(data);
+      data['_embedded']['classifications'].forEach(classifcation => {
+        console.log(classifcation);
+        if(classifcation.hasOwnProperty('segment')){
+          const segmentName = classifcation['segment']['name'];
+          console.log(segmentName);
+          drop_down.append('<option value="'+ segmentName +'">'+segmentName+'</option> ');
+        }
+      });
+  
+    });
+    
       $('#form-stacked-select').change(function (e) {
 
         console.log("change dropdown happened");
@@ -91,9 +105,13 @@ U
           var ul = $("<ul>");
           //Fill in the results of your API call here in this list
           console.log(data['_embedded']['events']);
-          data['_embedded']['events'].forEach( event => {
+          data['_embedded']['events'].forEach(event => {
+            //&& startDate < event['dates']['start']['dateTime'] < endDate
+            if (e.currentTarget.value === event['classifications'][0]['segment']['name']
+            ) {
             ul.append("<li>" + event['name'] + "</li>");
-          listOfEvents.append(ul); 
+             listOfEvents.append(ul); 
+          }
           }
           );
         });
@@ -101,13 +119,13 @@ U
 
       })
     })
-  </script>
+  </script> 
 <footer class="footer">
   <p class="footerP"> © Anya L | Zedekia M | Young P| Cory S © </p>
   
 </footer>
-
-<script src="server.js"></script>
+git s
+<script>$('input[name="dates"]').daterangepicker();</script>
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApCg5uzLYqLD0BQJYfmj-pNpJyU7fksSI
 &libraries=places&callback=activatePlacesSearch"></script> -->
 </body>
