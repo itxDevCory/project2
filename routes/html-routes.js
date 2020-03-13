@@ -20,13 +20,14 @@ module.exports = function(app) {
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
-  //*If the user already has an account send to the search/landing page*
+  //*If the user already has an account send to the search/landing page*//
   app.get("/", function(req, res) {
     if (req.user) {
       res.redirect("/search");
     }
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
+  //*
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page

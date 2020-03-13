@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+<p>
+  <center>
+    <a href='https://photos.google.com/share/AF1QipN7cBelqxNNpAPTYRaDTQAgDR_-PSEcPwy-C4FQHmbCncyfv4f_pGqReRcFFpOaSQ?key=R25nLTVVZmxMd01SVVVHWHNZNmMwRGJGT3dTM2lB&source=ctrlq.org'>
+    <img src='https://lh3.googleusercontent.com/x6viQiukSErXpjGxg_VM0YvXxQiXj-l911Nmd-g3_ZRJKGbKqm4nrNLlbU-Q8AIgLSKK2fdIcrD7QteETQesQDMZbKyso0oC3C2csmROyiO7u-Z5TW2DDBT-h3wVeEn0g5OGxf6wTQ=w2400'/>
+    </a>
+  </center>
+</p>
+
+<title> StayKay </title>
+</head>
+
+<body>
+    
+</div>
+<div class="header">
+  <h1><center> StayKay </center></h1>
+</div>
+
+<h2> How Long Is Your StayKay? </h2>
+<input type="text" name="daterange" value="01/01/2020 - 01/15/2040" />
+
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+
+U
+<h2>What Do You Want To Do?</h2>
+    <div class="uk-margin">
+        <div class="uk-form-controls">
+            <select class="uk-select budget" id="form-stacked-select">
+                <option value="Selections">Choose Your Adventure!</option>
+                <option value="Concerts">Concerts</option>
+                <option value="Festivals">Festivals</option>
+                <option value="Sports">Sports</option>
+                <option value="Theater/Arts">Theater or Arts</option>
+            </select>
+        </div>
+    </div>
+
+<br>
+<div id = "listOfEvents">
+  </div>
+<br>
+
+    <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom submit" 
+    type ="Submit" id = "SubmitB"> Enjoy Your Stay...</button>
+    
+<script language="JavaScript">
+  function processUser() {
+    var parameters = location.search.substring(1).split("&");
+
+    var temp = parameters[0].split("=");
+    l = unescape(temp[1]);
+    temp = parameters[1].split("=");
+    p = unescape(temp[1]);
+    document.getElementById("log").innerHTML = l;
+    document.getElementById("pass").innerHTML = p;
+
+  }
+</script>
+<script>
+  $(document).ready(function () {
+
+      $('#form-stacked-select').change(function (e) {
+
+        console.log("change dropdown happened");
+        
+        $.get("https://app.ticketmaster.com/discovery/v2/events.json?city=Philadelphia&countryCode=US&apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function (data) {
+          var listOfEvents = $('#listOfEvents');
+          listOfEvents.empty();
+          console.log(data);
+          var ul = $("<ul>");
+          //Fill in the results of your API call here in this list
+          console.log(data['_embedded']['events']);
+          data['_embedded']['events'].forEach( event => {
+            ul.append("<li>" + event['name'] + "</li>");
+          listOfEvents.append(ul); 
+          }
+          );
+        });
+
+
+      })
+    })
+  </script>
+<footer class="footer">
+  <p class="footerP"> © Anya L | Zedekia M | Young P| Cory S © </p>
+  
+</footer>
+
+<script src="server.js"></script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApCg5uzLYqLD0BQJYfmj-pNpJyU7fksSI
+&libraries=places&callback=activatePlacesSearch"></script> -->
+</body>
+</html>

@@ -54,7 +54,7 @@ module.exports = function(app) {
       });
     }
   });
-  //**
+  //*Api routes to connect to front end*
   app.get("api/user/:id", function(res) {
     res.then("/api/user");
   });
