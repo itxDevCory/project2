@@ -42,7 +42,7 @@ $(function() {
 });
 </script>
 
-
+U
 <h2>What Do You Want To Do?</h2>
     <div class="uk-margin">
         <div class="uk-form-controls">
@@ -55,17 +55,60 @@ $(function() {
             </select>
         </div>
     </div>
+
 <br>
+<div id = "listOfEvents">
+  </div>
 <br>
+
     <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom submit" 
     type ="Submit" id = "SubmitB"> Enjoy Your Stay...</button>
-    </center>
+    
+<script language="JavaScript">
+  function processUser() {
+    var parameters = location.search.substring(1).split("&");
 
+    var temp = parameters[0].split("=");
+    l = unescape(temp[1]);
+    temp = parameters[1].split("=");
+    p = unescape(temp[1]);
+    document.getElementById("log").innerHTML = l;
+    document.getElementById("pass").innerHTML = p;
+
+  }
+</script>
+<script>
+  $(document).ready(function () {
+
+      $('#form-stacked-select').change(function (e) {
+
+        console.log("change dropdown happened");
+        
+        $.get("https://app.ticketmaster.com/discovery/v2/events.json?city=Philadelphia&countryCode=US&apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function (data) {
+          var listOfEvents = $('#listOfEvents');
+          listOfEvents.empty();
+          console.log(data);
+          var ul = $("<ul>");
+          //Fill in the results of your API call here in this list
+          console.log(data['_embedded']['events']);
+          data['_embedded']['events'].forEach( event => {
+            ul.append("<li>" + event['name'] + "</li>");
+          listOfEvents.append(ul); 
+          }
+          );
+        });
+
+
+      })
+    })
+  </script>
 <footer class="footer">
   <p class="footerP"> © Anya L | Zedekia M | Young P| Cory S © </p>
   
 </footer>
 
 <script src="server.js"></script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApCg5uzLYqLD0BQJYfmj-pNpJyU7fksSI
+&libraries=places&callback=activatePlacesSearch"></script> -->
 </body>
 </html>
