@@ -1,0 +1,129 @@
+body {
+  font-family: 'Shadows Into Light', cursive;
+  background-size: cover; 
+  background-color:#B0c4de;
+  text-align: center;
+  }
+
+header{
+  font-size: 70px;
+  text-align: center;
+  font-family: 'Shadows Into Light', cursive;
+  color: white;
+  }
+  
+h1{
+  font-size: 70px;
+  background-color:#B0c4de;
+  opacity: .95;
+  color: white;
+  text-align: center;
+  font-family: 'Shadows Into Light', cursive;
+  }
+  
+h2{
+color: white;
+font-family: 'Shadows Into Light', cursive;
+font-size: 40px;
+  }
+ 
+.product-filters {
+    padding: 0.5rem 1.5rem;
+    margin-top: 2.5rem;
+    color: white;
+  }
+  
+.product-filters label {
+  color: #8A8A8A;
+  }
+  
+.product-filters .menu.nested {
+  margin-left: 0rem;
+  margin-bottom: 0.9rem;
+  }
+  
+.product-filters .menu > li > a {
+  padding-left: 0;
+  color: #4A4A4A;
+  font-size: 0.85rem;
+  font-weight: 600;
+  }
+  
+.product-filters .is-accordion-submenu-parent > a::after {
+  border-color: #CACACA transparent transparent;
+  }
+  
+.product-filters .clear-all {
+  font-size: 0.9rem;
+  color: #CACACA;
+  }
+  
+.product-filters .more {
+  color:#F4A460;
+  font-size: 0.9rem;
+  cursor: pointer;
+  }
+  
+.product-filters-header {
+  font-size: 1.25rem;
+  padding-top: 0.5rem;
+  }
+  
+.product-filters-tab {
+  border-top: 1px solid #E6E6E6;
+  }
+  
+.product-filters-tab:last-child() {
+  border-bottom: 1px solid #E6E6E6;
+  }
+  
+.mobile-product-filters {
+  border-bottom: 1px solid #E6E6E6;
+  }
+
+button {
+  background-color:#B0c4de;
+  border: 2px solid grey;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+  font-family: 'Shadows Into Light', cursive;
+  width: 10%;
+  margin:auto;
+  display:block;
+  }
+
+
+  .map {
+    height: 500px;
+  }
+  
+  .cards {
+    box-sizing: border-box;
+    width: 20%;
+    margin: 5px;
+    padding: 5px;
+    background-color:#B0c4de;
+    text-align: center;
+    color: white;
+    font-size: 21px;
+    
+  }
+  
+  .cards:first-child {
+    margin-left: 0px;
+  }
+  
+  .cards:last-child {
+    margin-right: 0px;
+  }
+  
+  .resultsdisplay{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0px;
+  }
+
