@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+//Requiring .env to hide API key
+require("dotenv").config();
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -17,10 +19,12 @@ module.exports = function(app) {
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
+  //*Here we also require user's zipcode for searching event API*
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      zipcode: req.body.zipcode
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -50,4 +54,41 @@ module.exports = function(app) {
       });
     }
   });
+  //**
+  app.get("api/user/:id", function(res) {
+    res.then("/api/user");
+  });
+
+  app.post("api/search", function(req) {
+    if (req.user) {
+      console.log("Api connect");
+      const { zipcode, start, end, type } = req.body;
+      const ticketmasterApi = (zipcode, start, end, type) => {
+        return axios.get(
+          `https://app.ticketmaster.com/discovery/v2/events.json
+            ?postalCode=${zipcode}
+            ?keyword=${type}
+            ?startDateTime${start}
+            ?endDateTime${end}
+            ?apiKey=${process.env.STAYKAY_API_KEY}`
+        );
+      };
+      // ticketmasterApi(zipcode, start, end, type)
+      //   .then(results => {
+      //     printResults(results);
+      //   })
+      //   .catch(error => {
+      //     printResults(error);
+      //   });
+
+      ticketmasterApi(zipcode, start, end, type)
+        .then(printResults)
+        .catch(printResults);
+    }
+  });
+
+  function printResults() {
+    console.log("Something should show up here.");
+  }
 };
+//**
