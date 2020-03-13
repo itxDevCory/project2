@@ -1,16 +1,16 @@
-// Requiring our models and travelinfo
+// Requiring our models and passport as we've configured it
 var db = require("../models");
-var travelInfo = require("../config/travelinfo");
+var passport = require("../config/passport");
+//Requiring .env to hide API key
+require("dotenv").config();
 
 module.exports = function(app) {
-  // Using the travelInfo.authenticate middleware with our local strategy.
+  // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  // eslint-disable-next-line prettier/prettier
-  app.post("/api/travelinfo", travelInfo.authenticate("local"), function(req, res) {
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
-      name: req.body.name,
       email: req.user.email,
       id: req.user.id
     });
@@ -19,10 +19,12 @@ module.exports = function(app) {
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
+  //*Here we also require user's zipcode for searching event API*
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      zipcode: req.body.zipcode
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -52,4 +54,41 @@ module.exports = function(app) {
       });
     }
   });
+  //*Api routes to connect to front end*
+  app.get("api/user/:id", function(res) {
+    res.then("/api/user");
+  });
+
+  app.post("api/search", function(req) {
+    if (req.user) {
+      console.log("Api connect");
+      const { zipcode, start, end, type } = req.body;
+      const ticketmasterApi = (zipcode, start, end, type) => {
+        return axios.get(
+          `https://app.ticketmaster.com/discovery/v2/events.json
+            ?postalCode=${zipcode}
+            ?keyword=${type}
+            ?startDateTime${start}
+            ?endDateTime${end}
+            ?apiKey=${process.env.STAYKAY_API_KEY}`
+        );
+      };
+      // ticketmasterApi(zipcode, start, end, type)
+      //   .then(results => {
+      //     printResults(results);
+      //   })
+      //   .catch(error => {
+      //     printResults(error);
+      //   });
+
+      ticketmasterApi(zipcode, start, end, type)
+        .then(printResults)
+        .catch(printResults);
+    }
+  });
+
+  function printResults() {
+    console.log("Something should show up here.");
+  }
 };
+//**
