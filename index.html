@@ -83,12 +83,20 @@ U
       $('#form-stacked-select').change(function (e) {
 
         console.log("change dropdown happened");
-        var listOfEvents = $('#listOfEvents');
-        listOfEvents.empty();
-        var ul = $("<ul>");
+        
+        $.get("https://app.ticketmaster.com/discovery/v2/events.json?apikey=FYrESnkDpsbAlOEIkzTKKMEXA4FuSrLq", function (data) {
+          var listOfEvents = $('#listOfEvents');
+          listOfEvents.empty();
+          console.log(data);
+          var ul = $("<ul>");
           //Fill in the results of your API call here in this list
-        ul.append("<li>" + this.value + "</li>");
-        listOfEvents.append(ul);
+          console.log(data['_embedded']['events']);
+          data['_embedded']['events'].forEach( event => {
+            ul.append("<li>" + event['name'] + "</li>");
+          listOfEvents.append(ul); 
+          }
+          );
+        });
 
 
       })
