@@ -2,8 +2,8 @@
 For this project, we created a "staycation" app or 'StayKay' that allows a user to lookup events in their locale based on their interests/time available.
 
 AS A person going on a 'staycation',
-I WANT a way to lookup things to do/places to go in Philadelphia,
-SO THAT I can enjoy my time off.
+I WANT a way to lookup things to do and places to go in Philadelphia,
+SO THAT I can enjoy my time off and well deserved relaxation.
 
 Key Topics
 
