@@ -30,7 +30,7 @@
 </div>
 
 <h2> How Long Is Your StayKay? </h2>
-<input type="text" name="daterange" value="03/01/2020 - 01/15/2040" />
+<input type="text" name="daterange" value="01/01/2020 - 01/15/2040" />
 
 <script>
 $(function() {
@@ -42,6 +42,7 @@ $(function() {
 });
 </script>
 
+U
 <h2>What Do You Want To Do?</h2>
     <div class="uk-margin">
         <div class="uk-form-controls">
@@ -90,7 +91,7 @@ $(function() {
           var ul = $("<ul>");
           //Fill in the results of your API call here in this list
           console.log(data['_embedded']['events']);
-          data['_embedded']['events'].forEach( event => {
+          data['_embedded']['events'].forEach(event => {
             ul.append("<li>" + event['name'] + "</li>");
           listOfEvents.append(ul); 
           }
@@ -100,13 +101,13 @@ $(function() {
 
       })
     })
-  </script>
+  </script>git 
 <footer class="footer">
   <p class="footerP"> © Anya L | Zedekia M | Young P| Cory S © </p>
   
 </footer>
-
-<script src="server.js"></script>
+git s
+<script>$('input[name="dates"]').daterangepicker();</script>
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApCg5uzLYqLD0BQJYfmj-pNpJyU7fksSI
 &libraries=places&callback=activatePlacesSearch"></script> -->
 </body>
